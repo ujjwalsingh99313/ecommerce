@@ -1,6 +1,5 @@
 package com.ujjawal.ecommerce.service;
 
-import com.ujjawal.ecommerce.model.Category;
 import com.ujjawal.ecommerce.model.Product;
 import com.ujjawal.ecommerce.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,13 @@ public class ProductService {
     public List<Product> getAllProduct(){
         return productRepository.findAll();
     }
+
+    public List<Product> getAllUnBlockedProduct(){
+        return productRepository.findAllActiveProduct();
+    }
+
     public void addProduct(Product product){
+        product.setIsBlocked(2);
         productRepository.save(product);
     }
 
@@ -29,6 +34,18 @@ public class ProductService {
     }
     /////this code is used in user section//////
     public List<Product> getAllProductsByCategoryId(int id){
-        return productRepository.findAllByCategory_Id(id);
+        return productRepository.findAllProductByCategoryId(id);
+    }
+
+    public void blockProductById(long id) {
+        Product prod = productRepository.findById(id).get();
+        prod.setIsBlocked(1);
+        productRepository.save(prod);
+    }
+
+    public void unblockProductById(long id) {
+        Product prod = productRepository.findById(id).get();
+        prod.setIsBlocked(2);
+        productRepository.save(prod);
     }
 }

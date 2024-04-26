@@ -28,7 +28,7 @@ public class HomeController {
     @GetMapping("/shop")
     public String shop(Model model) {
         model.addAttribute("categories", categoryService.getAllCategory());
-        model.addAttribute("products", productService.getAllProduct());
+        model.addAttribute("products", productService.getAllUnBlockedProduct());
         model.addAttribute("cartCount" , GlobalData.cart.size());
         return "shop";
     }

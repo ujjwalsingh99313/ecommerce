@@ -134,4 +134,16 @@ public class AdminController {
         return "productsAdd";
     }
 
+    @GetMapping ("/admin/product/block/{id}")
+    public String  block(@PathVariable long id) {
+        productService.blockProductById(id);
+        return "redirect:/admin/products" ;
+    }
+
+    @GetMapping ("/admin/product/unblock/{id}")
+    public String  unblock(@PathVariable long id) {
+        productService.unblockProductById(id);
+        return "redirect:/admin/products" ;
+    }
+
 }

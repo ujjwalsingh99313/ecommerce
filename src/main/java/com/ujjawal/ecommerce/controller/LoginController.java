@@ -14,12 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.sql.rowset.serial.SerialException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-
 public class LoginController {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -47,10 +45,10 @@ public class LoginController {
     public String registerPost(@ModelAttribute("user") User user, HttpServletRequest request) throws ServletException {
         System.out.println(user.getEmail());
         System.out.println( user.getPassword());
+        System.out.println(user.getId());
         String password = user.getPassword();
         user.setPassword(bCryptPasswordEncoder.encode(password));
         List<Role> roles = new ArrayList<>();
-
         roles.add(roleRepository.findById(2).get());
         user.setRoles(roles);
         userRepository.save(user);

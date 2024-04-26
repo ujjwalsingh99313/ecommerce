@@ -7,6 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Data
+@Table(name = "product")
 
 public class Product {
     @Id
@@ -23,4 +24,7 @@ public class Product {
     private double weight ;
     private String description;
     private String imageName;
+
+    private int isBlocked = 2;
+
 }

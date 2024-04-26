@@ -47,6 +47,7 @@
             <th scope="col">Preview</th>
             <th scope="col">Delete</th>
             <th scope="col">Update</th>
+            <th scope="col">Block</th>
         </tr>
         </thead>
         <tbody>
@@ -58,7 +59,11 @@
             <td><img src="" height="100px" width="100px"  th:src="@{${'/productImages/' + product.imageName}}"></td>
 
             <td><a href="" th:href="@{/admin/product/delete/{id}(id=${product.id})}" class="btn btn-danger">Delete</a></td>
-            <td><a href="" th:href="@{/admin/product/update/{id}(id=${product.id})}" class="btn btn-warning">Update</a></td>
+            <td><a th:if="${product.isBlocked == 2}" href="" th:href="@{/admin/product/update/{id}(id=${product.id})}" class="btn btn-warning">Update</a></td>
+            <td>
+                <a th:if="${product.isBlocked == 2}" href="" th:href="@{/admin/product/block/{id}(id=${product.id})}" class="btn btn-danger">Block</a>
+                <a th:if="${product.isBlocked == 1}" href="" th:href="@{/admin/product/unblock/{id}(id=${product.id})}" class="btn btn-success">UnBlock</a>
+            </td>
 
         </tr>
         </tbody>
